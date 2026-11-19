@@ -25,7 +25,7 @@ Linux, Python 3.11+, no third-party Python packages. GPL-3.0-or-later.
 
 ```bash
 sudo apt install pipx libnotify-bin poppler-utils   # notify-send and pdftotext are optional
-git clone <repo-url> award-hunter && cd award-hunter   # repository URL not published yet
+git clone https://github.com/KZ4IW/award-hunter.git && cd award-hunter
 pipx install .
 award-hunter init        # writes ~/.config/award-hunter/config.toml (call/grid taken from WSJT-X)
 ```

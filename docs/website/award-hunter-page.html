@@ -1,47 +1,87 @@
 <!--
-  Draft content for https://kz4iw.link/award-hunter/
-  Paste into a WordPress "Custom HTML" block (or switch a page to the code editor).
-  Plain HTML only: no scripts or iframes, so WordPress's KSES filter won't strip anything.
-  Items to fill in are marked TODO.
+  Source of https://kz4iw.link/award-hunter/ (WordPress page 227, one Custom HTML block).
+  Plain HTML + inline styles only; KSES strips scripts/iframes for non-admin saves.
 -->
-<h2>award-hunter</h2>
-<p><em>Designed by KZ4IW</em> · Free and open source (GPL-3.0) · Linux</p>
+<!-- wp:html -->
+<div class="ah-page" style="max-width:960px;margin:0 auto;">
 
-<p>award-hunter watches what WSJT-X decodes and points out stations you still need for an award,
-right in WSJT-X's Band Activity window. It was built for the ARRL <strong>America250 WAS</strong>
-event in 2026 and also handles plain Worked All States, grid squares and DXCC.</p>
+<div style="background:linear-gradient(135deg,#0b1a33 0%,#0D47A1 100%);color:#fff;border-radius:16px;padding:40px 32px;margin-bottom:36px;box-shadow:0 10px 30px rgba(13,71,161,.25);">
+  <p style="margin:0 0 8px;font-size:.85em;letter-spacing:.12em;text-transform:uppercase;opacity:.8;">Free &amp; open source · Linux · GPL-3.0</p>
+  <p style="margin:0 0 14px;font-size:2em;line-height:1.2;font-weight:600;">Never miss a needed state again.</p>
+  <p style="margin:0 0 24px;font-size:1.1em;line-height:1.6;opacity:.92;max-width:680px;">award-hunter watches what WSJT-X decodes and colours the stations you still need for
+  <strong>America250 WAS</strong>, Worked All States, grid squares and DXCC, right in WSJT-X's Band Activity window. A browser dashboard shows what's needed, which W1AW/n is on this week, and which band is open to the states you're missing.</p>
+  <p style="margin:0;">
+    <a href="https://github.com/KZ4IW/award-hunter" style="display:inline-block;background:#fff;color:#0D47A1;padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;margin:0 10px 10px 0;">View on GitHub</a>
+    <a href="#get-it" style="display:inline-block;border:2px solid rgba(255,255,255,.7);color:#fff;padding:10px 20px;border-radius:8px;font-weight:600;text-decoration:none;margin:0 10px 10px 0;">Install it</a>
+  </p>
+  <p style="margin:12px 0 0;font-size:.85em;opacity:.75;"><em>Designed by KZ4IW</em></p>
+</div>
 
-<!-- TODO: screenshot of WSJT-X with blue highlights, and of the browser page -->
+<figure style="margin:0 0 40px;">
+  <img src="https://kz4iw.link/wp-content/uploads/2026/11/award-hunter-needed-stations.png" alt="award-hunter dashboard listing needed stations heard in the last 15 minutes, with W1AW/5 and W1AW/7 flagged for needed states" style="width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:block;" />
+  <figcaption style="text-align:center;font-size:.9em;opacity:.75;margin-top:10px;">Needed stations heard: dark blue = recent LoTW user (likely to confirm), light blue = not on LoTW.</figcaption>
+</figure>
 
-<h3>What it does</h3>
-<ul>
-  <li><strong>Colours needed stations in WSJT-X.</strong> Dark blue means the station uploads to LoTW,
-      so your contact will probably confirm. Light blue means it doesn't. Blue is used because WSJT-X
-      already uses magenta for its own colouring.</li>
-  <li><strong>America250 aware.</strong> Paste your credits from the award page and it works out
-      which states you still need. It knows which W1AW/n station is on the air each week, and it stops
-      highlighting a state as soon as you log it.</li>
-  <li><strong>Band tips from PSK Reporter.</strong> A per-band table shows which band is bringing
-      needed stations into your grid right now.</li>
-  <li><strong>Alerts.</strong> Desktop notifications, plus optional phone push alerts through ntfy.</li>
-  <li><strong>Browser dashboard.</strong> Works on the shack PC, or from a tablet over remote desktop.</li>
-  <li><strong>Plays nicely with GridTracker.</strong> Both programs listen to WSJT-X's multicast
-      UDP feed at the same time, with no relay setup.</li>
-</ul>
+<h3 style="margin-top:0;">What it does</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:18px 0 40px;">
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">🎯 Highlights in WSJT-X</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Needed stations turn blue in Band Activity. Dark blue = LoTW user, light blue = not. Blue, because WSJT-X already uses magenta.</p>
+  </div>
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">🇺🇸 America250 aware</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Paste your credits from the award page. It knows which W1AW/n is on the air each week and stops highlighting a state as soon as you log it.</p>
+  </div>
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">📡 Band tips</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Uses PSK Reporter to show which band is bringing needed stations into your grid right now.</p>
+  </div>
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">🔔 Alerts</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Desktop notifications, plus optional phone push alerts through ntfy.</p>
+  </div>
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">🖥️ Browser dashboard</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Runs on the shack PC, or check it from a tablet over remote desktop.</p>
+  </div>
+  <div style="background:rgba(255,255,255,.55);border-left:4px solid #0D47A1;border-radius:10px;padding:18px 20px;">
+    <p style="margin:0 0 6px;font-weight:600;">🤝 Works with GridTracker</p>
+    <p style="margin:0;font-size:.95em;line-height:1.55;">Both programs listen to WSJT-X's multicast UDP feed at the same time, with no relay setup.</p>
+  </div>
+</div>
 
-<h3>Get it</h3>
-<p>Source code and install instructions: <a href="TODO-repository-url">TODO repository link</a></p>
-<pre><code>pipx install .
-award-hunter init
-award-hunter run</code></pre>
+<h3>A closer look</h3>
+<div style="display:grid;grid-template-columns:1fr;gap:30px;margin:18px 0 40px;">
+  <figure style="margin:0;">
+    <img src="https://kz4iw.link/wp-content/uploads/2026/11/award-hunter-band-tips.png" alt="Band tips table showing which bands are bringing needed stations into grid FM16, from PSK Reporter" style="width:100%;height:auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.22);display:block;" />
+    <figcaption style="font-size:.9em;opacity:.75;margin-top:8px;">Band tips: which band is open to the stations you need.</figcaption>
+  </figure>
+  <figure style="margin:0;">
+    <img src="https://kz4iw.link/wp-content/uploads/2026/11/award-hunter-america250.png" alt="America250 WAS panel: 8 states still needed and the W1AW stations on the air this week" style="width:100%;height:auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.22);display:block;" />
+    <figcaption style="font-size:.9em;opacity:.75;margin-top:8px;">America250 tracker: needed states and this week's W1AW/n stations.</figcaption>
+  </figure>
+</div>
+
+<h3 id="get-it">Get it</h3>
+<p>Source code and full install instructions are on GitHub:
+<a href="https://github.com/KZ4IW/award-hunter">github.com/KZ4IW/award-hunter</a></p>
+<div style="background:#0d1117;color:#e6edf3;border-radius:10px;padding:18px 22px;margin:14px 0 18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85em;line-height:1.75;overflow-wrap:anywhere;">
+<span style="opacity:.5;">$</span> sudo apt install pipx<br />
+<span style="opacity:.5;">$</span> git clone https://github.com/KZ4IW/award-hunter.git<br />
+<span style="opacity:.5;">$</span> cd award-hunter &amp;&amp; pipx install .<br />
+<span style="opacity:.5;">$</span> award-hunter init<br />
+<span style="opacity:.5;">$</span> award-hunter run
+</div>
 <p>Then set WSJT-X's UDP Server to <code>239.255.0.1</code> port <code>2237</code>, tick the loopback
-interface, and open <a href="http://127.0.0.1:8073">http://127.0.0.1:8073</a> on the same computer.</p>
+interface, and open <code>http://127.0.0.1:8073</code> in a browser on the same computer.</p>
 
-<h3>Video walkthrough</h3>
-<p><!-- TODO: link to the YouTube video once it's up --></p>
+<div style="background:rgba(13,71,161,.08);border-radius:12px;padding:22px 24px;margin:36px 0 28px;">
+  <p style="margin:0 0 6px;font-weight:600;font-size:1.1em;">Questions, bugs or ideas?</p>
+  <p style="margin:0;">Open an issue on <a href="https://github.com/KZ4IW/award-hunter/issues">GitHub</a>, or reach me through the <a href="/contact-me/">contact page</a>. 73!</p>
+</div>
 
-<h3>Questions or bugs</h3>
-<p><!-- TODO: issue tracker link, or contact info --></p>
+<p style="font-size:.8em;opacity:.7;line-height:1.6;">Screenshots show simulated decodes. award-hunter uses public data from the FCC ULS database, the ARRL LoTW user list and
+PSK Reporter. It is not affiliated with or endorsed by the ARRL. America250 is an ARRL event.</p>
 
-<p><small>award-hunter uses public data from the FCC ULS database, the ARRL LoTW user list and
-PSK Reporter. It is not affiliated with or endorsed by the ARRL. America250 is an ARRL event.</small></p>
+</div>
+<!-- /wp:html -->
