@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "award-hunter"
+dynamic = ["version"]
+description = "Highlight and alert on stations you still need for an award (WAS, America250, grids, DXCC) using WSJT-X UDP and PSK Reporter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "GPL-3.0-or-later"}
+authors = [{name = "KZ4IW"}]
+keywords = ["amateur radio", "ham radio", "WSJT-X", "FT8", "WAS", "America250", "PSK Reporter"]
+classifiers = [
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Topic :: Communications :: Ham Radio",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://kz4iw.link/award-hunter/"
+
+[project.scripts]
+award-hunter = "award_hunter.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "award_hunter.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+award_hunter = ["data/*.tsv", "web/*.html", "web/*.js", "web/*.css"]

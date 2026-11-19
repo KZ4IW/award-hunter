@@ -1,0 +1,14 @@
+[Unit]
+Description=award-hunter: highlight stations you still need (WSJT-X UDP + browser UI)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=%h/.local/bin/award-hunter run
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=default.target

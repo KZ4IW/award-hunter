@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>award-hunter</title>
+<meta name="author" content="KZ4IW">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>award-hunter</h1>
+  <span class="credit">Designed by KZ4IW</span>
+  <span id="station"></span>
+  <span id="wsjtx" class="pill">WSJT-X: …</span>
+  <span id="utc" class="muted"></span>
+</header>
+<main>
+  <section class="card wide">
+    <h2>Needed stations heard <span class="muted">(last 15 min)</span></h2>
+    <table id="heard"><thead><tr><th>Call</th><th>Need</th><th>LoTW</th><th>Band</th><th>SNR</th><th>Message</th><th>Age</th></tr></thead><tbody></tbody></table>
+    <p id="heard-empty" class="muted">Nothing needed decoded yet.</p>
+  </section>
+
+  <section class="card wide">
+    <h2>Bands <span class="muted" id="bands-meta"></span></h2>
+    <table id="bands"><thead><tr><th>Band</th><th>Score</th><th>Needed stations heard in your grid (PSK Reporter)</th></tr></thead><tbody></tbody></table>
+    <p id="bands-empty" class="muted"></p>
+  </section>
+
+  <div id="awards"></div>
+
+  <section class="card">
+    <h2>Status</h2>
+    <dl id="status"></dl>
+    <button id="refresh-data" type="button">Refresh FCC / LoTW data now</button>
+  </section>
+  <section class="card">
+    <h2>Log</h2>
+    <ul id="events"></ul>
+  </section>
+</main>
+<footer><span id="about">award-hunter · Designed by KZ4IW</span></footer>
+<template id="award-tpl">
+  <section class="card wide award">
+    <h2 class="title"></h2>
+    <p class="summary muted"></p>
+    <div class="w1aw"></div>
+    <div class="states"></div>
+    <p class="muted hint">Click a state to tick/untick it as needed. Dashed = worked, awaiting credit (click again to undo).</p>
+    <details class="credits">
+      <summary>Paste award credits</summary>
+      <p class="muted">Select the whole state list on the award's credits page, copy, paste here.</p>
+      <textarea rows="8"></textarea>
+      <button type="button" class="do-credits">Import credits</button>
+    </details>
+    <details class="schedule">
+      <summary>W1AW schedule</summary>
+      <p class="muted sched-info"></p>
+      <input type="file" accept="application/pdf" class="pdf">
+      <table class="upcoming"><thead><tr><th>State</th><th>Call</th><th>Week</th></tr></thead><tbody></tbody></table>
+    </details>
+    <p class="msg"></p>
+  </section>
+</template>
+<script src="/app.js"></script>
+</body>
+</html>

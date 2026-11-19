@@ -1,0 +1,47 @@
+<!--
+  Draft content for https://kz4iw.link/award-hunter/
+  Paste into a WordPress "Custom HTML" block (or switch a page to the code editor).
+  Plain HTML only: no scripts or iframes, so WordPress's KSES filter won't strip anything.
+  Items to fill in are marked TODO.
+-->
+<h2>award-hunter</h2>
+<p><em>Designed by KZ4IW</em> · Free and open source (GPL-3.0) · Linux</p>
+
+<p>award-hunter watches what WSJT-X decodes and points out stations you still need for an award,
+right in WSJT-X's Band Activity window. It was built for the ARRL <strong>America250 WAS</strong>
+event in 2026 and also handles plain Worked All States, grid squares and DXCC.</p>
+
+<!-- TODO: screenshot of WSJT-X with blue highlights, and of the browser page -->
+
+<h3>What it does</h3>
+<ul>
+  <li><strong>Colours needed stations in WSJT-X.</strong> Dark blue means the station uploads to LoTW,
+      so your contact will probably confirm. Light blue means it doesn't. Blue is used because WSJT-X
+      already uses magenta for its own colouring.</li>
+  <li><strong>America250 aware.</strong> Paste your credits from the award page and it works out
+      which states you still need. It knows which W1AW/n station is on the air each week, and it stops
+      highlighting a state as soon as you log it.</li>
+  <li><strong>Band tips from PSK Reporter.</strong> A per-band table shows which band is bringing
+      needed stations into your grid right now.</li>
+  <li><strong>Alerts.</strong> Desktop notifications, plus optional phone push alerts through ntfy.</li>
+  <li><strong>Browser dashboard.</strong> Works on the shack PC, or from a tablet over remote desktop.</li>
+  <li><strong>Plays nicely with GridTracker.</strong> Both programs listen to WSJT-X's multicast
+      UDP feed at the same time, with no relay setup.</li>
+</ul>
+
+<h3>Get it</h3>
+<p>Source code and install instructions: <a href="TODO-repository-url">TODO repository link</a></p>
+<pre><code>pipx install .
+award-hunter init
+award-hunter run</code></pre>
+<p>Then set WSJT-X's UDP Server to <code>239.255.0.1</code> port <code>2237</code>, tick the loopback
+interface, and open <a href="http://127.0.0.1:8073">http://127.0.0.1:8073</a> on the same computer.</p>
+
+<h3>Video walkthrough</h3>
+<p><!-- TODO: link to the YouTube video once it's up --></p>
+
+<h3>Questions or bugs</h3>
+<p><!-- TODO: issue tracker link, or contact info --></p>
+
+<p><small>award-hunter uses public data from the FCC ULS database, the ARRL LoTW user list and
+PSK Reporter. It is not affiliated with or endorsed by the ARRL. America250 is an ARRL event.</small></p>
