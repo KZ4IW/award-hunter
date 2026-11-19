@@ -146,7 +146,7 @@ class Engine:
                 self.hl.sent.pop(call, None)
                 self.heard.pop(call, None)
             else:
-                self.hl.sent.pop(call, None)           # colours re-evaluated on next decode
+                self.hl.sent.pop(call, None)           # colors re-evaluated on next decode
 
     def on_logged(self, call, grid="", band="", send=None):
         with self.lock:

@@ -174,10 +174,10 @@ changes. Gives worked calls (per award window), worked grids, worked DXCC.
 
 **WSJT-X Highlight Callsign (type 13).** Payload: id, callsign, background QColor, foreground
 QColor, `highlight_last` bool. QColor on the wire: `i8 spec, u16 alpha, u16 r, u16 g, u16 b,
-u16 pad` with spec 1 = RGB and 8-bit values scaled ×257. An *invalid* colour (spec 0) clears
+u16 pad` with spec 1 = RGB and 8-bit values scaled ×257. An *invalid* color (spec 0) clears
 the highlight for that call. Defaults are blue because WSJT-X already uses magenta/pink for
-its own "new" colouring: dark blue (white text) = recent LoTW user, light blue (black text) =
-not. Colours are configurable. Bookkeeping: re-send at most every `resend_seconds`; clear
+its own "new" coloring: dark blue (white text) = recent LoTW user, light blue (black text) =
+not. Colors are configurable. Bookkeeping: re-send at most every `resend_seconds`; clear
 when worked, when the needed list changes, and forget everything on WSJT-X Clear/restart
 (new source address or instance id).
 
@@ -226,7 +226,7 @@ Vanilla HTML/CSS/JS served from the package (no build step, no CDN — works off
 Polls `GET /api/status` every 3 s. Panels:
 
 - **Heard now:** needed stations decoded in the last 15 min — call, award/state, LoTW,
-  band, SNR, last message, age. Same colours as the WSJT-X highlight.
+  band, SNR, last message, age. Same colors as the WSJT-X highlight.
 - **Bands:** PSK Reporter per-band table (score, stations, heard-by), your band marked.
 - **Needed list:** the state grid — click to tick/untick; "Paste award credits" box; worked-
   awaiting-credit list; W1AW this week; schedule PDF upload (America250).
@@ -253,7 +253,7 @@ is read/write for your own needed list only; it cannot transmit.
 ways, ADIF, ALL.TXT, award-credits paste, schedule PDF text, PSK Reporter XML, FCC EN/HD
 rows) and a UDP simulator test: a fake WSJT-X sends Status + Decode datagrams to a running
 daemon on an ephemeral port and asserts it receives the right Highlight Callsign messages
-(colours, clear after QSO Logged). A multicast variant runs when the host supports it.
+(colors, clear after QSO Logged). A multicast variant runs when the host supports it.
 
 ## 11. Not in the MVP
 

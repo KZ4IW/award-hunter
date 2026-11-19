@@ -109,7 +109,7 @@ def parse_color(text):
     """'#0D47A1' or '0D47A1' -> (13, 71, 161)."""
     h = text.strip().lstrip("#")
     if len(h) != 6:
-        raise ValueError(f"colour must be #RRGGBB, got {text!r}")
+        raise ValueError(f"color must be #RRGGBB, got {text!r}")
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
 

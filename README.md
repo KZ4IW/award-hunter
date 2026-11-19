@@ -11,7 +11,7 @@ W1AW/n schedule, grid squares, and DXCC entities. Stations you need are:
 - **highlighted in WSJT-X's Band Activity window.** Dark blue with white text means the
   station uploaded to LoTW in the last year, so a contact will probably confirm. Light blue
   with black text means it hasn't. Blue is the default because WSJT-X already uses magenta
-  for its own colouring. You can change the colours.
+  for its own coloring. You can change the colors.
 - **listed in a browser page** (`http://127.0.0.1:8073`), along with a per-band table from
   PSK Reporter showing which band is bringing needed stations into your grid right now;
 - **pushed to you** if you want: a desktop notification, and/or a phone alert through
@@ -46,7 +46,7 @@ Or run it by hand: `award-hunter run`.
 
 On first start (and weekly after that) award-hunter downloads:
 
-- the FCC ULS amateur licence database (`l_amat.zip`, about 150 MB) from data.fcc.gov. It
+- the FCC ULS amateur license database (`l_amat.zip`, about 150 MB) from data.fcc.gov. It
   reduces this to a callsign→state table of about 10 MB and deletes the zip;
 - the ARRL LoTW user activity list (`lotw-user-activity.csv`).
 
@@ -79,7 +79,7 @@ highlighting.
 Open <http://127.0.0.1:8073>. On a tablet over RDP, just open it in the remote desktop's
 browser.
 
-- **Needed stations heard:** needed stations decoded in the last 15 minutes, coloured the
+- **Needed stations heard:** needed stations decoded in the last 15 minutes, colored the
   same way as in WSJT-X.
 - **Bands:** needed stations that PSK Reporter receivers in your 4-character grid heard on
   each band in the last 15 minutes, with your current band marked. Queries run at most every
