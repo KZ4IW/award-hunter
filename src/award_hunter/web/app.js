@@ -142,10 +142,11 @@ function renderAward(key, a) {
     for (const s of a.states) {
       const b = el("button", s.code);
       b.type = "button";
-      b.title = s.name + (s.pending ? " — worked, awaiting credit: " + s.pending : s.needed ? " — needed" : " — have it");
+      b.title = s.name + (s.pending ? " — worked, awaiting credit: " + s.pending + " (click: have it)"
+        : s.needed ? " — needed (click: worked, awaiting credit)" : " — have it (click: needed)");
       if (s.pending) b.className = "pending";
       else if (s.needed) b.className = "needed";
-      b.addEventListener("click", () => act(key, s.pending ? "undone" : "toggle", { state: s.code }, p));
+      b.addEventListener("click", () => act(key, "cycle", { state: s.code }, p));
       box.append(b);
     }
     const w = $(".w1aw", p);

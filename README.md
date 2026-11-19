@@ -84,11 +84,13 @@ browser.
 - **Bands:** needed stations that PSK Reporter receivers in your 4-character grid heard on
   each band in the last 15 minutes, with your current band marked. Queries run at most every
   5 minutes and only while WSJT-X is decoding.
-- **America250 / WAS:** click a state to tick or untick it as needed. Or open **Paste award
-  credits**: select the whole state list on the award's credits page, copy it, paste it here,
-  and award-hunter works out what's still needed. States you've worked but that aren't
-  credited yet show dashed. The W1AW/n stations on the air this week for states you need are
-  listed. The 2026 schedule is built in; **W1AW schedule** lets you import a newer ARRL PDF.
+- **America250 / WAS:** click a state to step it through have it → needed (blue) → worked,
+  awaiting credit (dashed) → have it. Or open **Paste award credits**: select the whole state
+  list on the award's credits page, copy it, paste it here, and award-hunter works out what's
+  still needed. A W1AW/n contact during that state's week turns it dashed on its own; mark
+  other worked-not-credited states dashed with a click. The W1AW/n stations on the air this
+  week for states you need are listed. The 2026 schedule is built in; **W1AW schedule** lets
+  you import a newer ARRL PDF.
 
 When you log a QSO, that station's highlight is cleared straight away. It's also cleared on
 the next start, because award-hunter reads `wsjtx_log.adi`.

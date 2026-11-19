@@ -111,6 +111,19 @@ class America250Logic(unittest.TestCase):
         self.assertIsNone(self.classify(app, "W1AW/0"))
         self.assertIsNone(self.classify(app, "N0NE"))             # NE no longer needed
 
+    def test_click_cycles_have_needed_pending(self):
+        app = make_app(self.NOW, "")
+        p = app.plugins["america250"]
+        app.action("america250", "credits", {"text": credits_paste({"KS"})})
+        app.action("america250", "cycle", {"state": "KS"})          # needed -> dashed
+        self.assertIn("KS", p.pending)
+        self.assertIsNone(self.classify(app, "KS0XX"))
+        app.action("america250", "cycle", {"state": "KS"})          # dashed -> have it
+        self.assertNotIn("KS", p.pending)
+        self.assertNotIn("KS", p.needed)
+        app.action("america250", "cycle", {"state": "KS"})          # have it -> needed
+        self.assertEqual(self.classify(app, "KS0XX").label, "KS")
+
     def test_old_qso_does_not_count(self):
         app = make_app(self.NOW, "<call:5>KS0XX<qso_date:8>20251231<eor>")
         self.assertIsNotNone(self.classify(app, "KS0XX"))

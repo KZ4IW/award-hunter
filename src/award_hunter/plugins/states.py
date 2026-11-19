@@ -130,6 +130,17 @@ class WAS(Award):
             if st not in STATES:
                 raise ValueError(f"unknown state {st!r}")
             self.needed ^= {st}
+        elif name == "cycle":
+            # UI click: have -> needed -> worked, awaiting credit (dashed) -> have
+            if st not in STATES:
+                raise ValueError(f"unknown state {st!r}")
+            if st in self.pending:
+                self.pending.pop(st)
+                self.needed.discard(st)
+            elif st in self.needed:
+                self.pending[st] = f"marked by hand {datetime.now(UTC):%Y-%m-%d}"
+            else:
+                self.needed.add(st)
         elif name == "set_needed":
             vals = {s.upper() for s in payload.get("states", [])}
             if not vals <= set(STATES):
