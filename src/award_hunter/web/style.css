@@ -34,6 +34,11 @@ summary { cursor: pointer; color: var(--accent); }
 dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 0 0 10px; }
 dt { color: var(--muted); }
 dd { margin: 0; }
+#station { color: var(--fg); text-decoration: none; border-bottom: 1px dashed var(--muted); }
+#station-form { display: grid; gap: 8px; max-width: 360px; }
+#station-form label { display: grid; gap: 2px; color: var(--muted); font-size: 13px; }
+#station-form input { font: inherit; font-family: ui-monospace, monospace; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
+#station-form .row { display: flex; flex-wrap: wrap; gap: 8px; }
 .credit { color: var(--muted); font-size: 13px; }
 footer { text-align: center; padding: 8px 16px 16px; color: var(--muted); font-size: 13px; }
 footer a { color: var(--accent); }

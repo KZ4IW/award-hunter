@@ -45,6 +45,7 @@ class App:
         self._adif_sig = None
         self._store_ver = -1
         self.lock = threading.RLock()
+        self.apply_station(self.store.section("settings").get("station"))
 
     # ------------------------------------------------------------ paths & data
     @property
@@ -129,6 +130,36 @@ class App:
             self.engine.reloaded()
         self.tipper.recompute()
         return True
+
+    # ------------------------------------------------------------ settings
+    def station_source(self):
+        if self.store.section("settings").get("station"):
+            return "web"
+        return self.cfg.get("_station_source", {}).get("call") or ""
+
+    def apply_station(self, st):
+        """Set call/grid (None = back to config file / WSJT-X values). A new grid drops band tips."""
+        default = self.cfg.get("_station_default", self.cfg["station"])
+        new = dict(st) if st else dict(default)
+        old_grid = self.cfg["station"]["grid"]
+        self.cfg["station"].update(call=new["call"], grid=new["grid"])
+        if new["grid"] != old_grid and hasattr(self, "tipper"):
+            self.tipper.grid_changed()
+
+    def update_settings(self, payload):
+        with self.lock:
+            sec = self.store.section("settings")
+            if payload.get("reset"):
+                sec.pop("station", None)
+                msg = "using the call and grid from your config file / WSJT-X again"
+            else:
+                call, grid = config.clean_station(payload.get("call"), payload.get("grid"))
+                sec["station"] = {"call": call, "grid": grid}
+                msg = f"saved: {call} in {grid}"
+            self.store.save()
+            self.apply_station(sec.get("station"))
+            self.engine.event(f"settings: {msg}")
+            return {"ok": True, "message": msg}
 
     # ------------------------------------------------------------ UDP
     def open_socket(self):
@@ -249,7 +280,8 @@ class App:
         now = time.time()
         inst = [{"id": k, "addr": f"{v[0][0]}:{v[0][1]}", "age": round(now - v[2])} for k, v in self.instances.items()]
         return {
-            "station": {"call": self.cfg["station"]["call"], "grid": self.cfg["station"]["grid"]},
+            "station": {"call": self.cfg["station"]["call"], "grid": self.cfg["station"]["grid"],
+                        "source": self.station_source(), "default": self.cfg.get("_station_default", {})},
             "wsjtx": {"connected": any(i["age"] < 60 for i in inst), "instances": inst, "band": self.engine.band,
                       "mode": self.engine.mode, "packets": self.udp_packets,
                       "last_decode_age": round(now - self.engine.last_decode) if self.engine.last_decode else None,

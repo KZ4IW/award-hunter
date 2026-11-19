@@ -119,6 +119,11 @@ watch = ["DN83", "EM77"]   # empty list = any grid not yet in your log
 enabled = true
 ```
 
+Your callsign and grid come from WSJT-X (My Call / My Grid) unless you set them under
+`[station]`. You can also change them in the **Settings** panel on the page (or click the
+callsign in the header). A value saved there overrides both, and "Use WSJT-X / config file"
+undoes it.
+
 Changes made in the browser page (ticked states, credits, schedule) are saved to
 `~/.local/state/award-hunter/state.json`. award-hunter never rewrites your config file.
 

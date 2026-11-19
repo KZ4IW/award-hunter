@@ -101,6 +101,12 @@ class BandTipper:
         except (OSError, ValueError, KeyError):
             self.raw, self.raw_time = None, 0
 
+    def grid_changed(self, now=None):
+        """Station grid changed: old reports are for the wrong area. Next query still >= 300 s after the last."""
+        now = now or time.time()
+        self.raw, self.result = None, None
+        self.next_at = max(now, self.raw_time + MIN_INTERVAL, self.next_at if self.backoff else 0)
+
     def _fetch(self, grid):
         req = urllib.request.Request(query_url(grid), headers={"User-Agent": f"award-hunter/{__version__} (+https://kz4iw.link/award-hunter/)"})
         with urllib.request.urlopen(req, timeout=90) as r:

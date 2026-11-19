@@ -8,7 +8,6 @@ ExecStart=%h/.local/bin/award-hunter run
 Restart=on-failure
 RestartSec=10
 NoNewPrivileges=yes
-PrivateTmp=yes
 
 [Install]
 WantedBy=default.target

@@ -190,11 +190,54 @@ function renderAbout(a) {
   } else f.append(a.credit);
 }
 
+const SOURCE_TEXT = {
+  web: "Set here. This overrides your config file and WSJT-X.",
+  config: "From your config file ([station] in config.toml).",
+  wsjtx: "From WSJT-X (My Call / My Grid). Change it there, or set it here.",
+  "": "Not set. Enter your callsign and grid square.",
+};
+let settingsDirty = false;
+
+function renderSettings(st) {
+  const call = $("#set-call"), grid = $("#set-grid");
+  if (!settingsDirty && document.activeElement !== call && document.activeElement !== grid) {
+    call.value = st.call || "";
+    grid.value = st.grid || "";
+  }
+  let src = SOURCE_TEXT[st.source] || "";
+  if (st.source === "web" && st.default && st.default.call) src += ` (Default would be ${st.default.call} ${st.default.grid || ""}.)`;
+  $("#set-source").textContent = src;
+  $("#set-reset").hidden = st.source !== "web";
+}
+
+async function saveSettings(body) {
+  const m = $("#set-msg");
+  try {
+    const r = await api("/api/settings", body);
+    settingsDirty = false;
+    m.textContent = r.message;
+    m.className = "msg ok";
+    refresh();
+  } catch (e) {
+    m.textContent = e.message;
+    m.className = "msg err";
+  }
+}
+
+for (const id of ["#set-call", "#set-grid"]) $(id).addEventListener("input", () => { settingsDirty = true; });
+$("#station-form").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  saveSettings({ call: $("#set-call").value, grid: $("#set-grid").value });
+});
+$("#set-reset").addEventListener("click", () => { settingsDirty = false; saveSettings({ reset: true }); });
+
 function renderStatus(s) {
   $("#station").textContent = `${s.station.call || "(no call)"} ${s.station.grid || ""}`;
   const w = $("#wsjtx");
-  w.textContent = s.wsjtx.connected ? `WSJT-X ${s.wsjtx.band || ""} ${s.wsjtx.mode || ""}` : "WSJT-X: no UDP";
-  w.className = "pill " + (s.wsjtx.connected ? "ok" : "bad");
+  const viaFile = !s.wsjtx.connected && s.wsjtx.last_decode_age !== null && s.wsjtx.last_decode_age < 120;
+  w.textContent = s.wsjtx.connected ? `WSJT-X ${s.wsjtx.band || ""} ${s.wsjtx.mode || ""}`
+    : viaFile ? `WSJT-X ${s.wsjtx.band || ""} ${s.wsjtx.mode || ""} (ALL.TXT, no highlighting)` : "WSJT-X: no decodes";
+  w.className = "pill " + (s.wsjtx.connected || viaFile ? "ok" : "bad");
   $("#utc").textContent = s.utc;
   const dl = $("#status");
   dl.replaceChildren();
@@ -219,6 +262,7 @@ async function refresh() {
     colors = s.colors;
     renderStatus(s);
     renderAbout(s.about);
+    renderSettings(s.station);
     renderHeard(s.heard);
     renderBands(s);
     for (const [k, a] of Object.entries(s.awards)) renderAward(k, a);

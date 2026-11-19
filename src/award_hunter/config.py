@@ -111,11 +111,15 @@ def load(path=None):
         with open(path, "rb") as fh:
             _merge(cfg, tomllib.load(fh))
     ini = wsjtx_ini()
+    source = {}
     for k in ("call", "grid"):
+        source[k] = "config" if cfg["station"][k] else ("wsjtx" if ini.get(k) else "")
         if not cfg["station"][k]:
             cfg["station"][k] = ini.get(k, "")
     cfg["station"]["call"] = cfg["station"]["call"].upper()
     cfg["station"]["grid"] = cfg["station"]["grid"].upper()[:4]
+    cfg["_station_default"] = dict(cfg["station"])
+    cfg["_station_source"] = source
     cfg["wsjtx"]["log_dir"] = os.path.expanduser(cfg["wsjtx"]["log_dir"])
     cfg["bandtips"]["interval_seconds"] = max(300, int(cfg["bandtips"]["interval_seconds"]))
     cfg["_path"] = path
@@ -131,6 +135,20 @@ def write_template(path=None):
     with open(path, "w") as fh:
         fh.write(TEMPLATE.format(call=ini.get("call", ""), grid=ini.get("grid", "")[:4]))
     return True
+
+
+CALL_SETTING_RE = re.compile(r"^(?:[A-Z0-9]{1,4}/)?[A-Z0-9]{1,3}[0-9][A-Z0-9]{0,3}[A-Z](?:/[A-Z0-9]{1,4})?$")
+GRID_SETTING_RE = re.compile(r"^[A-R]{2}[0-9]{2}(?:[A-X]{2})?$")
+
+
+def clean_station(call, grid):
+    """Validate a callsign and Maidenhead grid typed in the UI; returns (CALL, GRID4)."""
+    call, grid = (call or "").strip().upper(), (grid or "").strip().upper()
+    if not CALL_SETTING_RE.match(call):
+        raise ValueError(f"{call or '(empty)'} doesn't look like a callsign")
+    if not GRID_SETTING_RE.match(grid):
+        raise ValueError(f"{grid or '(empty)'} isn't a grid square (e.g. EM48 or EM48ab)")
+    return call, grid[:4]
 
 
 def parse_hostport(s, default_port=2237):

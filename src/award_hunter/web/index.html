@@ -11,7 +11,7 @@
 <header>
   <h1>award-hunter</h1>
   <span class="credit">Designed by KZ4IW</span>
-  <span id="station"></span>
+  <a id="station" href="#settings" title="Change callsign and grid"></a>
   <span id="wsjtx" class="pill">WSJT-X: …</span>
   <span id="utc" class="muted"></span>
 </header>
@@ -29,6 +29,20 @@
   </section>
 
   <div id="awards"></div>
+
+  <section class="card" id="settings">
+    <h2>Settings</h2>
+    <form id="station-form" autocomplete="off">
+      <label>Callsign <input id="set-call" name="call" maxlength="14" spellcheck="false" autocapitalize="characters"></label>
+      <label>Grid square <input id="set-grid" name="grid" maxlength="6" spellcheck="false" placeholder="EM48"></label>
+      <div class="row">
+        <button type="submit">Save</button>
+        <button type="button" id="set-reset">Use WSJT-X / config file</button>
+      </div>
+    </form>
+    <p id="set-source" class="muted"></p>
+    <p id="set-msg" class="msg"></p>
+  </section>
 
   <section class="card">
     <h2>Status</h2>

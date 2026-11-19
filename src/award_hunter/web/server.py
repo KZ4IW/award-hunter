@@ -73,6 +73,8 @@ def make_handler(app, token):
             try:
                 if m:
                     return self._send(200, app.action(m.group(1), m.group(2), payload))
+                if self.path == "/api/settings":
+                    return self._send(200, app.update_settings(payload))
                 if self.path == "/api/refresh-data":
                     threading.Thread(target=app.refresh_data, kwargs={"force": True}, daemon=True).start()
                     return self._send(200, {"ok": True, "message": "refresh started"})
